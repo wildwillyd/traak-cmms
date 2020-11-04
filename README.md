@@ -1,4 +1,14 @@
 # traak-cmms
+# Traak
+Capstone Project @ Ohio Northern Univerisity - 2020/2021
+
+Contributors - Dominic Ferrante, Wayne Geissinger, Will Davis, Brian Rexroth
+
+Advisor - Dr. Srinivasa Vemuru
+
+# Goal
+This software will be able to track maintenance, equipment, and inventory records for facility and campus managers
+
 
 ## Project setup
 ```
