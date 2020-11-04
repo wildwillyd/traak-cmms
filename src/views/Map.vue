@@ -18,7 +18,7 @@
 
 <script>
 //import Radio from '../components/liveMapComponents/Radio.vue'
-import LiveMap from '../components/liveMapComponents/Konva.vue'
+import LiveMap from '../components/liveMapComponents/LiveMap.vue'
 //stand-in for line above
 //import Map from '../components/liveMapComponents/HelloWorld.vue'
 //import Tree from '../components/liveMapComponents/Tree.vue'

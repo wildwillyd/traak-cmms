@@ -1,9 +1,11 @@
 <template>
+  <v-stage ref="stage" :config="stageSize">
     <v-layer ref="layer">
       <v-image :config="{
             image: image
           }"/>
     </v-layer>
+  </v-stage>
 
 </template>
 
