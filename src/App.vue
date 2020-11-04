@@ -1,12 +1,31 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <a-layout>
+      <Sidebar />
+      <a-layout>
+        <a-layout-content :style="{height: '100vh'}">
+          <router-view />
+        </a-layout-content>
+      </a-layout>
+    </a-layout>
   </div>
 </template>
+
+<script>
+import Sidebar from '@/components/Sidebar.vue'
+
+export default {
+  name: "App",
+  data () {
+    return {
+
+    }
+  },
+  components: {
+    Sidebar
+  }
+}
+</script>
 
 <style lang="less">
 #app {
