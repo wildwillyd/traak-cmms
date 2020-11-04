@@ -2,32 +2,32 @@
 
      <a-layout>
      <a-layout-sider>
-       <radio/>
+       <!-- <radio/> -->
      </a-layout-sider>
 
      <a-layout-content>
-      <Map/>
+      <LiveMap/>
      </a-layout-content>
 
      <a-layout-sider>
-       <tree/>
+       <!-- <tree/> -->
      </a-layout-sider>
      </a-layout>
 
 </template>
 
 <script>
-import Radio from '../components/liveMapComponents/Radio.vue'
-//import Map from '../components/liveMapComponents/Konva.vue'
+//import Radio from '../components/liveMapComponents/Radio.vue'
+import LiveMap from '../components/liveMapComponents/Konva.vue'
 //stand-in for line above
-import Map from '../components/liveMapComponents/HelloWorld.vue'
-import Tree from '../components/liveMapComponents/Tree.vue'
+//import Map from '../components/liveMapComponents/HelloWorld.vue'
+//import Tree from '../components/liveMapComponents/Tree.vue'
 
 export default {
   components: {
-    Radio,
-    Map,
-    Tree
+    //Radio,
+    LiveMap//,
+    //Tree
   }
 }
 </script>
