@@ -1,35 +1,15 @@
 <template>
-  <v-stage ref="stage" :config="stageSize">
-    <v-layer ref="layer">
-      <v-image :config="{
-            image: image
-          }"/>
-    </v-layer>
-  </v-stage>
+
+  <PolygonLayer/>
 
 </template>
 
 <script>
-const width = window.innerWidth;
-const height = window.innerHeight;
+import PolygonLayer from './PolygonLayer.vue';
 
 export default {
-  data() {
-    return {
-      stageSize: {
-        width: width,
-        height: height
-      },
-      image: null
-    };
-  },
-  created() {
-    const image = new window.Image();
-    image.src = "../assets/liveMapAssets/floorplan.jpg";
-    image.onload = () => {
-      // set image only when it is loaded
-      this.image = image;
-    };
+  components: {
+    PolygonLayer
   }
 };
 </script>
