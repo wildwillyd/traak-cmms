@@ -1,23 +1,31 @@
 <template>
-<v-stage 
-    ref="stage" 
-    :config="stageSize"
-    @mousedown="handleStageMouseDown"
-    @touchstart="handleStageMouseDown"
-  >
-  <v-layer>
-  <mapImg/>
-  </v-layer>
+
+  <v-stage 
+      ref="stage" 
+      :config="stageSize"
+      @mousedown="handleStageMouseDown"
+      @touchstart="handleStageMouseDown"
+    >
+
+    <v-layer>
+
+      <mapImg/>
+
+    </v-layer>
+
     <v-layer ref="layer">
+
       <v-rect
         v-for="item in rectangles"
         :key="item.id"
         :config="item"
         @transformend="handleTransformEnd"
       />
+
       <v-transformer ref="transformer" />
+
     </v-layer>
-    </v-stage>
+  </v-stage>
 </template>
 
 <script>
@@ -38,12 +46,12 @@ export default {
       rectangles: [
         {
           rotation: 0,
-          x: 478,
-          y: 480,
+          x: 737.9488695979911,
+          y: 34.86822451433958,
           width: 100,
           height: 100,
-          scaleX: 3.71,
-          scaleY: 2.48,
+          scaleX: 1.7805113040201124,
+          scaleY: 5.856171151216743,
           fill: 'red',
           name: 'rect1',
           draggable: true,
@@ -51,14 +59,53 @@ export default {
         },
         {
           rotation: 0,
-          x: 150,
-          y: 150,
+          x: 368.23097709744985,
+          y: 253.3423888333654,
           width: 100,
           height: 100,
-          scaleX: 1,
-          scaleY: 1,
+          scaleX: 2.494959484233252,
+          scaleY: 2.3594570012600746,
           fill: 'green',
           name: 'rect2',
+          draggable: true,
+          opacity: 0.3
+        },
+         {
+          rotation: 0,
+          x: 13.999999999999925,
+          y: 539.0000000000005,
+          width: 100,
+          height: 100,
+          scaleX: 4.772761848800234,
+          scaleY: 1.3013739025922908,
+          fill: 'red',
+          name: 'rect3',
+          draggable: true,
+          opacity: 0.3
+        },
+         {
+          rotation: 0,
+          x: 175.21707198009048,
+          y: 245.21788100016988,
+          width: 100,
+          height: 100,
+          scaleX: 1.4478292801990866,
+          scaleY: 2.617821189998313,
+          fill: 'green',
+          name: 'rect4',
+          draggable: true,
+          opacity: 0.3
+        },
+         {
+          rotation: 0,
+          x: 14.000000000000007,
+          y: 42.00000000000004,
+          width: 100,
+          height: 100,
+          scaleX: 1.8269773373458313,
+          scaleY: 1.8480603225384533,
+          fill: 'blue',
+          name: 'rect5',
           draggable: true,
           opacity: 0.3
         },

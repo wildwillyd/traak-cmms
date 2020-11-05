@@ -1,16 +1,16 @@
 <template>
 <div id=radio>
   <a-radio-group v-model="value" @change="onChange">
-    <a-radio :value="1">
+    <a-radio :value="1" style="color:white">
       K-12 Building Floor 1
     </a-radio>
-    <a-radio :value="2">
+    <a-radio :value="2" style="color:white">
       K-12 Building Floor 2
     </a-radio>
-    <a-radio :value="3">
+    <a-radio :value="3" style="color:white">
       Nature Observatory
     </a-radio>
-    <a-radio :value="4">
+    <a-radio :value="4" style="color:white">
       Athletics Building
     </a-radio>
   </a-radio-group>
