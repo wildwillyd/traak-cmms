@@ -20,7 +20,7 @@ export default {
             navigationItems: [
                 {key: 1, iconType: "home", spanText: "Home", link: "/"},
                 {key: 2, iconType: "environment", spanText: "Map", link: '/Map'},
-                {key: 3, iconType: "inbox", spanText: "Equiptment", link: "/Equiptment"},
+                {key: 3, iconType: "inbox", spanText: "Equipment", link: "/Equiptment"},
                 {key: 4, iconType: "key", spanText: "Inventory", link: "/Inventory"},
                 {key: 5, iconType: "form", spanText: "Reports", link: "/Report"},
                 {key: 6, iconType: "copy", spanText: "Documents", link: "/Document"},
