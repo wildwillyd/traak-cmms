@@ -20,7 +20,7 @@ export default {
   },
   created() {
     const image = new window.Image();
-    image.src = "https://www.crismatec.com/python/of/office-design-space-floor-plan-medical_office-decoration.jpg";
+    image.src = require('../../assets/liveMapAssets/floorplan.jpg');
     image.onload = () => {
       // set image only when it is loaded
       this.image = image;

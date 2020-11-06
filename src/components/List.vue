@@ -7,7 +7,8 @@
         <a slot="title" href="https://www.antdv.com/">{{ item.title }}</a>
         <a-avatar
           slot="avatar"
-          src="../assets/logo.png"
+          :src="item.image" 
+          @loadError=loadFailed
         />
       </a-list-item-meta>
     </a-list-item>
@@ -17,28 +18,37 @@
 const data = [
   {
     title: 'Ant Design Title 1',
-    text: 'Equipment1'
+    text: 'Equipment1',
+    image: require('../assets/logo.png')
   },
   {
     title: 'Ant Design Title 2',
-    text: 'Equipment2'
+    text: 'Equipment2',
+    image: require('../assets/logo.png')
   },
   {
     title: 'Ant Design Title 3',
-    text: 'Equipment3'
+    text: 'Equipment3',
+    image: require('../assets/logo.png')
   },
   {
     title: 'Ant Design Title 4',
-    text: 'Equipment4'
+    text: 'Equipment4',
+    image: require('../assets/logo.png')
   },
 ];
 export default {
     name: "List",
-  data() {
-    return {
-      data,
-    };
-  },
+    data() {
+        return {
+            data,
+        };
+    },
+    methods: {
+        loadFailed(){
+            console.log("The image load failed");
+        }
+    }
 };
 </script>
 <style></style>
