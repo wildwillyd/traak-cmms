@@ -34,7 +34,7 @@ export default {
     methods: {
     onChange(e) {
       console.log('radio checked', e.target.value);
-      this.CurrentAreaNo = e.target.value;
+      this.CurrentAreaNo = e.target.AreaNo;
     },
   },
 };
