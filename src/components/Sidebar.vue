@@ -5,7 +5,7 @@
     @collapse="onCollapse"
     @breakpoint="onBreakpoint" >
         <div>
-            <img class="logo" src="../assets/logo.png" alt="Company Logo">
+            <img class="logo" src="../assets/TraakLogoV2.png" alt="Company Logo">
         </div>
         <NavItem />
     </a-layout-sider>

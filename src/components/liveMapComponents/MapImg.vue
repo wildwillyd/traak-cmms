@@ -20,7 +20,7 @@ export default {
   },
   created() {
     const image = new window.Image();
-    image.src = require('../../assets/liveMapAssets/floorplan.jpg');
+    image.src = require('../../assets/liveMapAssets/floorplan2.jpg');
     image.onload = () => {
       // set image only when it is loaded
       this.image = image;
