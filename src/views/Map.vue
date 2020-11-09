@@ -3,7 +3,7 @@
      <a-layout>
 
      <a-layout-content>
-      <LiveMap/>
+      <LiveMap :CurrentAreaNo = this.CurrentAreaNo></LiveMap>
      </a-layout-content>
 
      <a-layout-sider width="250" >
@@ -40,6 +40,12 @@ export default {
     Radio,
     LiveMap,
     Tree
+  },
+  data() {
+    this.AreaNo = this.$Radio.params.CurrentAreaNo;
+  },
+  created(){
+    this.AreaNo = this.$Radio.params.CurrentAreaNo;
   }
 }
 </script>

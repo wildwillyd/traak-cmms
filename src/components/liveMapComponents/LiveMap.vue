@@ -1,6 +1,6 @@
 <template>
 
-  <PolygonLayer/>
+  <PolygonLayer :CurrentAreaNo = this.CurrentAreaNo></PolygonLayer>
 
 </template>
 
@@ -8,6 +8,8 @@
 import PolygonLayer from './PolygonLayer.vue';
 
 export default {
+  props:
+    ['CurrentAreaNo'],
   components: {
     PolygonLayer
   }

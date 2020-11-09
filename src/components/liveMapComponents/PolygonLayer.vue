@@ -9,7 +9,7 @@
 
     <v-layer>
 
-      <mapImg/>
+      <mapImg :CurrentAreaNo = this.CurrentAreaNo></mapImg>
 
     </v-layer>
 
@@ -34,6 +34,8 @@ const width = window.innerWidth;
 const height = window.innerHeight;
 
 export default {
+  props: 
+  ['CurrentAreaNo'],
     components: {
         mapImg
     },
