@@ -1,6 +1,6 @@
 <template>
 
-  <PolygonLayer :CurrentAreaNo = this.CurrentAreaNo></PolygonLayer>
+  <PolygonLayer CurrentAreaNo = this.CurrentAreaNo></PolygonLayer>
 
 </template>
 

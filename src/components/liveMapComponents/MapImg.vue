@@ -8,11 +8,7 @@
 const width = window.innerWidth;
 const height = window.innerHeight;
 
-export default {
-  props: ['CurrentAreaNo'],
-  data() {
-    /* eslint-disable no-unused-labels */
-    items: [
+let items= [
       {path: '../../assets/liveMapAssets/A701-1.png'},
       {path: '../../assets/liveMapAssets/A801-1.png'},
       {path: '../../assets/liveMapAssets/A802-1.png'},
@@ -21,8 +17,13 @@ export default {
       {path: '../../assets/liveMapAssets/A805-1.png'},
       {path: '../../assets/liveMapAssets/A806-1.png'}
     ]
-    /* eslint-enable no-unused-labels */
+
+export default {
+  props: ['CurrentAreaNo'],
+  data() {
     return {
+      AreaNo: this.CurrentAreaNo,
+      items,
       stageSize: {
         width: width,
         height: height
@@ -32,7 +33,8 @@ export default {
   },
   created() {
     const image = new window.Image();
-    image.src = require(this.items.path[this.CurrentAreaNo]);
+    let item = items[this.AreaNo];
+    image.src = require(item.path);
     image.onload = () => {
       // set image only when it is loaded
       this.image = image;

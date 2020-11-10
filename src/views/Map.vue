@@ -3,7 +3,7 @@
      <a-layout>
 
      <a-layout-content>
-      <LiveMap :CurrentAreaNo = this.CurrentAreaNo></LiveMap>
+      <LiveMap CurrentAreaNo = this.AreaNo></LiveMap>
      </a-layout-content>
 
      <a-layout-sider width="250" >
@@ -13,13 +13,13 @@
                           -ms-transform: translateY(-50%);
                           transform: translateY(-50%);">
 
-      <div style="border:">
+      <div>
        Facilities
       </div>
 
-       <radio/>
+       <Radio/>
 
-      <div style="padding:100px"/>
+      <div style="padding:50px"/>
 
        Selected Facility Equipment:
        
@@ -31,6 +31,9 @@
 </template>
 
 <script>
+
+let AreaNo = 0;
+
 import Radio from '../components/liveMapComponents/Radio.vue'
 import LiveMap from '../components/liveMapComponents/LiveMap.vue'
 import Tree from '../components/liveMapComponents/Tree.vue'
@@ -42,10 +45,12 @@ export default {
     Tree
   },
   data() {
-    this.AreaNo = this.$Radio.params.CurrentAreaNo;
+    return{
+    AreaNo
+    }
   },
   created(){
-    this.AreaNo = this.$Radio.params.CurrentAreaNo;
+    this.AreaNo = Radio.CurrentAreaNo;
   }
 }
 </script>

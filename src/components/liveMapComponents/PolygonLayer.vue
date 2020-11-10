@@ -9,7 +9,7 @@
 
     <v-layer>
 
-      <mapImg :CurrentAreaNo = this.CurrentAreaNo></mapImg>
+      <mapImg CurrentAreaNo = this.CurrentAreaNo></mapImg>
 
     </v-layer>
 
