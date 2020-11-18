@@ -18,9 +18,9 @@ export default {
         return {
             //Eventually return these from a store via a computed value
             navigationItems: [
-                {key: 1, iconType: "home", spanText: "Home", link: "/"},
+                {key: 1, iconType: "home", spanText: "Home", link: "Dashboard"},
                 {key: 2, iconType: "environment", spanText: "Map", link: '/Map'},
-                {key: 3, iconType: "inbox", spanText: "Equipment", link: "/Equiptment"},
+                {key: 3, iconType: "inbox", spanText: "Equipment", link: "/Equipment"},
                 {key: 4, iconType: "key", spanText: "Inventory", link: "/Inventory"},
                 {key: 5, iconType: "form", spanText: "Reports", link: "/Report"},
                 {key: 6, iconType: "copy", spanText: "Documents", link: "/Document"},

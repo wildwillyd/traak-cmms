@@ -4,7 +4,7 @@
       <a-list-item-meta
         :description="item.text"
       >
-        <a slot="title" href="https://www.antdv.com/">{{ item.title }}</a>
+        <a slot="title" @click="equipmentClicked">{{ item.title }}</a>
         <a-avatar
           slot="avatar"
           :src="item.image" 
@@ -47,6 +47,9 @@ export default {
     methods: {
         loadFailed(){
             console.log("The image load failed");
+        },
+        equipmentClicked(e){
+            console.log(e.target.item.text + "was clicked");
         }
     }
 };

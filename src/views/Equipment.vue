@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>
-            This is the Equiptment Page
+            This is the Equipment Page
         </h1>
         <Drawer />
     </div>
@@ -11,7 +11,7 @@
 import Drawer from '@/components/Drawer.vue';
 
 export default {
-    
+    name: 'Equipment',
 
     components: {
         Drawer
