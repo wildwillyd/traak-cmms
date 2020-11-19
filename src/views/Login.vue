@@ -42,8 +42,8 @@
                 Remember Username
                 </a-checkbox>
             </a-form-item>
-            <a id="login-forgot" href=""> Forgot Password </a>
             <a-button id="login-submit" type="primary" html-type="submit"> Log In </a-button>
+            <a id="login-forgot" href=""> Forgot Password </a>
         </a-form>
     </div>
 </template>
@@ -78,9 +78,7 @@ export default {
 #logo-image{
     max-width: 300px
 }
-#login-forgot {
-    float: right;
-}
+
 #login-submit {
     width: 100%;
 }
