@@ -1,18 +1,11 @@
 <template>
   <div id="app">
-    <a-layout>
-      <Sidebar />
-      <a-layout>
-        <a-layout-content :style="{height: '100vh'}">
-          <router-view />
-        </a-layout-content>
-      </a-layout>
-    </a-layout>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Sidebar from '@/components/Sidebar.vue'
+//import Sidebar from '@/components/Sidebar.vue'
 
 export default {
   name: "App",
@@ -22,7 +15,7 @@ export default {
     }
   },
   components: {
-    Sidebar
+    //Sidebar
   }
 }
 </script>
