@@ -1,6 +1,6 @@
 <template>
     <div id="something">
-        <a-card :style="{height: '95vh'}">
+        <a-card :style="{height: '100vh'}">
             <a-row type="flex" justify="start">
                 <a-col :flex="1">
                     <img id="logo" alt="Equipment Image" src="../assets/logo.png"/>
@@ -10,7 +10,7 @@
                     <p> This is an Item description </p>
                 </a-col>
                 <a-col :flex="1">
-                    <a-button type="primary" @click="changeDrawerVisible"> Equipment </a-button>
+                    <a-button type="primary" @click="openDrawer"> Equipment </a-button>
                 </a-col>
             </a-row>
             <!--<a-divider orientation="left"> Current Tab </a-divider>-->
@@ -30,6 +30,13 @@
 <script>
 export default {
     name: "ItemInfo",
+    props:{
+    },
+    methods:{
+        openDrawer(){
+            this.$emit('openDrawer');
+        }
+    }
 }
 </script>
 

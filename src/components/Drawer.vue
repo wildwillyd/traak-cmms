@@ -1,8 +1,5 @@
 <template>
   <div>
-    <a-button type="primary" @click="showDrawer">
-      Open
-    </a-button>
     <a-drawer
       title="Equipment List"
       placement="right"
@@ -12,9 +9,6 @@
       @close="onClose"
     >
         <List />
-      <!--<p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>-->
     </a-drawer>
   </div>
 </template>
@@ -24,12 +18,15 @@ import List from '@/components/List.vue'
 
 export default {
     name: "Drawer",
-
+    components: {
+        List
+    },
     data() {
         return {
-            visible: false,
+            //visible: false,
         };
     },
+    props: ['visible'],
     methods: {
         afterVisibleChange(val) {
             console.log('visible', val);
@@ -38,11 +35,14 @@ export default {
             this.visible = true;
         },
         onClose() {
-            this.visible = false;
+            this.$emit('closeDrawer');
         },
     },
-    components: {
-        List
-    }
+    computed: {
+      isVisible(){
+        return this.visible;
+      },
+    },
+    
 };
 </script>
