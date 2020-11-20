@@ -1,7 +1,7 @@
 <template>
     <div id="something">
         <a-card :style="{height: '100vh'}">
-            <a-row type="flex" justify="start">
+            <a-row id="top-row" type="flex" justify="start" align="middle">
                 <a-col :flex="1">
                     <img id="logo" alt="Equipment Image" src="../assets/logo.png"/>
                 </a-col>
@@ -44,5 +44,8 @@ export default {
 img#logo{
     max-height: 100px;
     max-width: 100px;
+}
+#top-row{
+    padding-bottom: 8px;
 }
 </style>
