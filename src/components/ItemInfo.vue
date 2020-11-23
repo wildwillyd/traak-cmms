@@ -1,6 +1,6 @@
 <template>
     <div id="something">
-        <a-card :style="{height: '100vh'}">
+        <a-card :style="{height: '100%'}">
             <a-row id="top-row" type="flex" justify="start" align="middle">
                 <a-col :flex="1">
                     <img id="logo" alt="Equipment Image" src="../assets/logo.png"/>
@@ -17,7 +17,7 @@
             
             <!-- I think content of tabs are lazy loaded so we shouldn't run into a performance hit? -->
             <a-tabs type="card" tab-position="top">
-                <a-tab-pane key="1" tab="Reports"> Reports Here </a-tab-pane>
+                <a-tab-pane key="1" tab="Logs"> <LogTab /> </a-tab-pane>
                 <a-tab-pane key="2" tab="Parts"> Parts Here </a-tab-pane>
                 <a-tab-pane key="3" tab="Schedule"> Schedule Here </a-tab-pane>
                 <a-tab-pane key="4" tab="Docs"> Documents Here </a-tab-pane>
@@ -28,15 +28,20 @@
 </template>
 
 <script>
+import LogTab from '@/components/EquipmentTabs/LogTab.vue'
+
 export default {
     name: "ItemInfo",
+    components: {
+        LogTab
+    },
     props:{
     },
     methods:{
         openDrawer(){
             this.$emit('openDrawer');
         }
-    }
+    },
 }
 </script>
 

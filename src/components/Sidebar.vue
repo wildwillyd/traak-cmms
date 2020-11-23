@@ -3,7 +3,8 @@
     breakpoint="md"
     :collapsed-width="collapsedWidth"
     @collapse="onCollapse"
-    @breakpoint="onBreakpoint" >
+    @breakpoint="onBreakpoint"
+    :zeroWidthTriggerStyle='sidebarIconStyle'>
         <div>
             <img class="logo" src="../assets/TraakLogoV2.png" alt="Company Logo">
         </div>
@@ -19,7 +20,14 @@ export default {
     data () {
         return {
             collapsed: false,
-            collapsedWidth: 80
+            collapsedWidth: 80,
+            sidebarIconStyle: {
+                position: 'absolute',
+                left: '0px',
+                top: '80vh'
+                //If we ever implement swipe gestures this is how we would hide the sidebar icon on phones
+                //visibility: "hidden"
+            }
         }
     },
     components: {
