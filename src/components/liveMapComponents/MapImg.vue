@@ -1,10 +1,14 @@
 <template>
       <v-image :config="{
-            image: image
+            image: image,
+            width:900,
+            height:900
           }"/>
 </template>
 
 <script>
+import store from "../../store/index.js"
+
 const width = window.innerWidth;
 const height = window.innerHeight;
 
@@ -19,10 +23,8 @@ let items= [
     ]
 
 export default {
-  props: ['CurrentAreaNo'],
   data() {
     return {
-      AreaNo: this.CurrentAreaNo,
       items,
       stageSize: {
         width: width,
@@ -33,12 +35,17 @@ export default {
   },
   created() {
     const image = new window.Image();
-    let item = items[this.AreaNo];
-    image.src = require(item.path);
+    //let item = items[this.AreaNo];
+    image.src = require(items[getCurrentMap()]); // replace with item.path to revert
     image.onload = () => {
       // set image only when it is loaded
       this.image = image;
     };
+  },
+  computed: {
+    getCurrentMap(){
+    return store.getters.getMapState;
+    }
   }
 };
 </script>

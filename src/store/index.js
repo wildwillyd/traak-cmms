@@ -5,8 +5,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    currentMap: 1
   },
   mutations: {
+    changeMap(state, mapNo) {
+      state.currentMap = mapNo;
+    }
+  },
+  getters: {
+    getMapState: state => {
+      return state.currentMap;
+    }
   },
   actions: {
   },
