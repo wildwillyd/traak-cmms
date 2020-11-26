@@ -36,6 +36,7 @@ export default {
     methods: {
         onCollapse(collapsed, type) {
             console.log(collapsed, type);
+            this.$store.commit('changeCollapsed');
         },
         onBreakpoint(broken) {
             console.log(broken);
