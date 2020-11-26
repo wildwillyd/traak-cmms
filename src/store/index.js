@@ -5,12 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    collapsed: false
+    currentMap: 1
   },
   mutations: {
-    changeCollapsed(state){
-      state.collapsed = !state.collapsed;
-      console.log("mutator called");
+    changeMap(state, mapNo) {
+      state.currentMap = mapNo;
+    }
+  },
+  getters: {
+    getMapState: state => {
+      return state.currentMap;
     }
   },
   actions: {
