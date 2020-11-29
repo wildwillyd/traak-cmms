@@ -19,8 +19,8 @@
             <a-tabs type="card" tab-position="top">
                 <a-tab-pane key="1" tab="Logs"> <LogTab /> </a-tab-pane>
                 <a-tab-pane key="2" tab="Parts"> <PartTab /> </a-tab-pane>
-                <a-tab-pane key="3" tab="Schedule"> Schedule Here </a-tab-pane>
-                <a-tab-pane key="4" tab="Docs"> Documents Here </a-tab-pane>
+                <a-tab-pane key="3" tab="Schedule"> <ScheduleTab /> </a-tab-pane>
+                <a-tab-pane key="4" tab="Docs"> <DocumentTab /> </a-tab-pane>
             </a-tabs>
         </a-card>
         
@@ -30,12 +30,17 @@
 <script>
 import LogTab from '@/components/EquipmentTabs/LogTab.vue'
 import PartTab from '@/components/EquipmentTabs/PartTab.vue'
+import ScheduleTab from '@/components/EquipmentTabs/ScheduleTab.vue'
+import DocumentTab from '@/components/EquipmentTabs/DocumentTab.vue'
+
 
 export default {
     name: "ItemInfo",
     components: {
         LogTab,
         PartTab,
+        ScheduleTab,
+        DocumentTab
     },
     props:{
     },

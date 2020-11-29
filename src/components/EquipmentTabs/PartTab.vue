@@ -2,7 +2,7 @@
     <a-list :grid="{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl: 4 }" :data-source="data">
         <a-list-item slot="renderItem" slot-scope="part">
             <a :href="part.href">
-                <a-card :src="part.href" :title="part.name" hoverable="true">
+                <a-card :src="part.href" :title="part.name" :hoverable="true">
                     {{part.desc}}
                 </a-card>
             </a>
