@@ -42,11 +42,11 @@ export default {
             console.log(broken);
             if (broken) {
                 this.collapsedWidth = 0;
-                this.$store.commit('changeCollapsed');
+                this.$store.commit('changeCollapsed', true);
             }
             else {
                 this.collapsedWidth = 80;
-                this.$store.commit('changeCollapsed');
+                this.$store.commit('changeCollapsed', false);
             }
         },
     },

@@ -16,8 +16,8 @@ export default new Vuex.Store({
      * Controlled in Sidebar.vue
      * Changes the state of the sidebar being collapsed for the application
      */
-    changeCollapsed(state) {
-      state.collapsed = !state.collapsed;
+    changeCollapsed(state, bool) {
+      state.collapsed = bool;
       console.log("The current collpased is" + state.collapsed);
     }
   },
