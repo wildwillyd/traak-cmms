@@ -1,7 +1,7 @@
 <template>
     <div id="content">
         <a-list item-layout="vertical" size="default" :pagination="pagination" :data-source="listData">
-            <a-list-item id="list-item" slot="renderItem" key="item.index" slot-scope="item" class="alignClass">
+            <a-list-item id="list-item" slot="renderItem" key="item.index" slot-scope="item" :style="{textAlign: alignment}">
                 <template v-for="{ type, text } in actions" slot="actions">
                     <span :key="type">
                         <a-icon :type="type" style="margin-right: 8px" />
@@ -55,24 +55,21 @@ export default {
             actions: [
                 { type: 'message', text: '2' },
             ],
-            alignClass: 'left-aligned'
         };
     },
     computed: {
         alignment(){
-            console.log(this.$store.state.collapsed);
-            return {};
+            if(this.$store.getters.getCollapsed) {
+                return "center";
+            }
+            else {
+                return "left";
+            }
         }
     }
 };
 </script>
 
 <style scoped>
-.left-aligned {
-    text-align: left;
-}
 
-.center-aligned {
-    text-align: center;
-}
 </style>

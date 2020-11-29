@@ -36,7 +36,7 @@ export default {
   created() {
     const image = new window.Image();
     //let item = items[this.AreaNo];
-    image.src = require(items[getCurrentMap()]); // replace with item.path to revert
+    //image.src = require(items[getCurrentMap()]); // replace with item.path to revert
     image.onload = () => {
       // set image only when it is loaded
       this.image = image;

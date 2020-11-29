@@ -36,15 +36,17 @@ export default {
     methods: {
         onCollapse(collapsed, type) {
             console.log(collapsed, type);
-            this.$store.commit('changeCollapsed');
+            
         },
         onBreakpoint(broken) {
             console.log(broken);
             if (broken) {
                 this.collapsedWidth = 0;
+                this.$store.commit('changeCollapsed');
             }
             else {
                 this.collapsedWidth = 80;
+                this.$store.commit('changeCollapsed');
             }
         },
     },
