@@ -69,9 +69,11 @@ export default {
       showIcon: true,
     };
   },
+  
   methods: {
     onSelect(selectedKeys, info) {
       console.log('selected', selectedKeys, info);
+      this.$store.commit('changeMap', this.$store.getters.getMapState + 1);
     },
   },
 };

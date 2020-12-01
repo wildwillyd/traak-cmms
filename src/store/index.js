@@ -8,6 +8,7 @@ export default new Vuex.Store({
     currentMap: 1,
     collapsed: false
   },
+
   mutations: {
     changeMap(state, mapNo) {
       state.currentMap = mapNo;
@@ -21,6 +22,7 @@ export default new Vuex.Store({
       console.log("The current collpased is" + state.collapsed);
     }
   },
+
   getters: {
     getMapState: state => {
       return state.currentMap;
@@ -33,7 +35,10 @@ export default new Vuex.Store({
       return state.collapsed;
     }
   },
+
   actions: {
+
+    
   },
   modules: {
   }

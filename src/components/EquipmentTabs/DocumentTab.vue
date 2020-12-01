@@ -17,9 +17,11 @@
                 </div>
             </template>
             <span slot="tags" slot-scope="tags, record">
-                <a-tag v-for="tag in tags" :key="tag" :color="tag === 'helpful' ? 'green' : 'blue'">
+                <a-tag :closable="record.editable" @close="e => removeTag(e, e.target.value, record.key)" v-for="tag in tags" :key="tag" :color="tag === 'helpful' ? 'green' : 'blue'">
                     {{tag.toLowerCase()}}
                 </a-tag>
+                
+                <!-- If in Edit mode -->
                 <template v-if="record.editable">
                     <a-popover title="Add Tag" trigger="click" v-model="tagPopoverVisible">
                         <span slot="content">
@@ -73,7 +75,7 @@ const data = [
 ];
 
 export default {
-  data() {
+    data() {
     this.cacheData = data.map(item => ({ ...item }));
     return {
       data,
@@ -83,59 +85,81 @@ export default {
       tagName: ""
     };
   },
+
   methods: {
     handleChange(value, key, column) {
-      const newData = [...this.data];
-      const target = newData.filter(item => key === item.key)[0];
-      if (target) {
-        target[column] = value;
-        this.data = newData;
-      }
+        const newData = [...this.data];
+        const target = newData.filter(item => key === item.key)[0];
+        if (target) {
+            target[column] = value;
+            this.data = newData;
+        }
     },
+
     edit(key) {
-      const newData = [...this.data];
-      const target = newData.filter(item => key === item.key)[0];
-      this.editingKey = key;
-      if (target) {
-        target.editable = true;
-        this.data = newData;
-      }
+        const newData = [...this.data];
+        const target = newData.filter(item => key === item.key)[0];
+        this.editingKey = key;
+        if (target) {
+            target.editable = true;
+            this.data = newData;
+        }
     },
+
     save(key) {
-      const newData = [...this.data];
-      const newCacheData = [...this.cacheData];
-      const target = newData.filter(item => key === item.key)[0];
-      const targetCache = newCacheData.filter(item => key === item.key)[0];
-      if (target && targetCache) {
-        delete target.editable;
-        this.data = newData;
-        Object.assign(targetCache, target);
-        this.cacheData = newCacheData;
-      }
-      this.editingKey = '';
+        const newData = [...this.data];
+        const newCacheData = [...this.cacheData];
+        const target = newData.filter(item => key === item.key)[0];
+        const targetCache = newCacheData.filter(item => key === item.key)[0];
+        if (target && targetCache) {
+            delete target.editable;
+            this.data = newData;
+            Object.assign(targetCache, target);
+            this.cacheData = newCacheData;
+        }
+        this.editingKey = '';
     },
+
     cancel(key) {
-      const newData = [...this.data];
-      const target = newData.filter(item => key === item.key)[0];
-      this.editingKey = '';
-      if (target) {
-        Object.assign(target, this.cacheData.filter(item => key === item.key)[0]);
-        delete target.editable;
-        this.data = newData;
-      }
+        const newData = [...this.data];
+        const target = newData.filter(item => key === item.key)[0];
+        this.editingKey = '';
+        if (target) {
+            Object.assign(target, this.cacheData.filter(item => key === item.key)[0]);
+            delete target.editable;
+            this.data = newData;
+        }
     },
+
     addTagPopover() {
         this.tagPopoverVisible = true;
     },
+
+    /* ---- Currently Tags are not able to be 'Saved' or 'Cancelled'
+            I think this is fine but should be discussed ---------*/
+            
     addTag(value, key) {
-      const newData = [...this.data];
-      const target = newData.filter(item => key === item.key)[0];
-      if (target) {
-        target.tags.push(value);
-        this.data = newData;
-      }
+        const newData = [...this.data];
+        const target = newData.filter(item => key === item.key)[0];
+        if (target) {
+            target.tags.push(value);
+            this.data = newData;
+        }
+    },
+
+    removeTag(e, value, key) {
+        //Stops the default 'remove' of the tag
+        e.preventDefault();
+        //Actually remove the tag from the list
+        const newData = [...this.data];
+        const target = newData.filter(item => key === item.key)[0];
+        if (target) {
+            const index = target.tags.indexOf(value);
+            target.tags.splice(index, 1);
+            this.data = newData;
+        }
     }
-  },
+    },
 };
 </script>
 <style scoped>
