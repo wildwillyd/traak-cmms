@@ -13,8 +13,8 @@
 <script>
 
 const data = [
-    {name: "Part 2", desc: "Description of Part 2", href: 'https://www.antdv.com/'},
     {name: "Part 1", desc: "Description of Part 1", href: 'https://www.antdv.com/'},
+    {name: "Part 2", desc: "Description of Part 2", href: 'https://www.antdv.com/'},
     {name: "Part 3", desc: "Description of Part 3", href: 'https://www.antdv.com/'},
     {name: "Part 4", desc: "Description of Part 4", href: 'https://www.antdv.com/'},
     {name: "Part 5", desc: "Description of Part 5", href: 'https://www.antdv.com/'},

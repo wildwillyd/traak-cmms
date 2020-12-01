@@ -21,9 +21,19 @@
                     {{tag.toLowerCase()}}
                 </a-tag>
                 <template v-if="record.editable">
-                    <a @click="addTag">
-                        <a-icon type="plus-square" />
-                    </a> 
+                    <a-popover title="Add Tag" trigger="click" v-model="tagPopoverVisible">
+                        <span slot="content">
+                            <a-row>
+                                <a-col>
+                                    <a-input v-model="tagName" @pressEnter="e => addTag(e.target.value, record.key)"> </a-input>
+                                    <!--<a click="addTag"> Add </a>-->
+                                </a-col>
+                            </a-row>
+                        </span>
+                        <a @click="addTagPopover">
+                            <a-icon type="plus-square" />
+                        </a> 
+                    </a-popover>
                 </template>
             </span>
             <template slot="action" slot-scope="text, record">
@@ -69,6 +79,8 @@ export default {
       data,
       columns,
       editingKey: '',
+      tagPopoverVisible: false,
+      tagName: ""
     };
   },
   methods: {
@@ -112,8 +124,16 @@ export default {
         this.data = newData;
       }
     },
-    addTag() {
-        console.log("TODO - ADD TAG FUNCTIONALITY");
+    addTagPopover() {
+        this.tagPopoverVisible = true;
+    },
+    addTag(value, key) {
+      const newData = [...this.data];
+      const target = newData.filter(item => key === item.key)[0];
+      if (target) {
+        target.tags.push(value);
+        this.data = newData;
+      }
     }
   },
 };
