@@ -28,22 +28,29 @@ export default {
       stageSize: {
         width: width,
         height: height
-      }
+      },
+      image: null
     };
   },
   created() {
-    
+      const image = new window.Image();
+      image.src = items[this.$store.getters.getMapState].path;
+      image.onload = () => {
+        //set image only when it is loaded
+        this.image = image;
+      };
+      
   },
 
   computed: {
     mapImage(){
       const image = new window.Image();
-      
+      image.src = items[this.$store.getters.getMapState].path;
       image.onload = () => {
         //set image only when it is loaded
         console.log("Image loaded")
+        this.image = image;
       };
-      image.src = items[this.$store.getters.getMapState].path;
       console.log("returning image");
       return image;
     }
