@@ -144,6 +144,7 @@ export default {
         if (target) {
             target.tags.push(value);
             this.data = newData;
+            this.tagName = "";
         }
     },
 
