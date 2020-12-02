@@ -6,7 +6,7 @@
                     <img id="logo" alt="Equipment Image" src="../assets/logo.png"/>
                 </a-col>
                 <a-col :flex="10" style="{textAlign: left;}">
-                    <h1> <strong> Item Name </strong> </h1>
+                    <h1> <strong> {{equipmentName}} </strong> </h1>
                     <p> This is an Item description </p>
                 </a-col>
                 <a-col :flex="1">
@@ -42,13 +42,18 @@ export default {
         ScheduleTab,
         DocumentTab
     },
-    props:{
+    props: {
     },
-    methods:{
+    methods: {
         openDrawer(){
             this.$emit('openDrawer');
         }
     },
+    computed: {
+        equipmentName(){
+            return this.$store.getters.getEquipmentName;
+        }
+    }
 }
 </script>
 

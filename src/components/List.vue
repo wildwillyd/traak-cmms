@@ -2,7 +2,7 @@
   <a-list item-layout="horizontal" :data-source="data">
     <a-list-item slot="renderItem" slot-scope="item">
       <a-list-item-meta :description="item.text" >
-        <a slot="title" @click="e => equipmentClicked(e, item.equipID)"> 
+        <a slot="title" @click="e => equipmentClicked(e, item.text)"> 
           {{ item.title }} 
         </a>
         <a-avatar
@@ -54,8 +54,9 @@ export default {
         loadFailed(){
             console.log("The image load failed");
         },
-        equipmentClicked(e, id){
-            console.log(id + " was clicked");
+        equipmentClicked(e, name){
+            console.log(name + " was clicked");
+            this.$store.dispatch('selectEquipment', {name})
         }
     }
 };

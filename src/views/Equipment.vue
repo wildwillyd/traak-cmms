@@ -9,7 +9,6 @@
 import Drawer from '@/components/Drawer.vue';
 import ItemInfo from '@/components/ItemInfo.vue';
 
-
 export default {
     name: 'Equipment',
     data(){
