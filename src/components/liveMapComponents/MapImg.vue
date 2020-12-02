@@ -1,9 +1,5 @@
 <template>
-      <v-image :config="{
-            image: mapImage, 
-            width: 900,
-            height: 900
-          }"/>
+      <v-image :config="configImg"/>
 </template>
 
 <script>
@@ -43,6 +39,16 @@ export default {
   },
 
   computed: {
+
+    configImg: function() {
+      return{
+        x: 0,
+        y: 0,
+        image: this.image,
+        width: 900,
+        height: 900
+      }
+    },
     mapImage(){
       const image = new window.Image();
       image.src = items[this.$store.getters.getMapState].path;
@@ -54,6 +60,9 @@ export default {
       console.log("returning image");
       return image;
     }
+  },
+  mounted() {
+    this.image.src = require(items[this.$store.getters.getMapState].path);
   }
 };
 </script>
