@@ -81,13 +81,13 @@ Dependency List
 // const FileSystem = require("fs");
 
 //CSV to JSON push and conversion
-/*CSVtoJSON().fromFile("./sourcefile.csv").then(source => {
+CSVtoJSON().fromFile("./sourcefile.csv").then(source => {
   console.log(source);
   source.push({
     //whatever columns we have in the CSV
     //format
     //"column": "value"
-  });
+});
 
 
   //Converstion back to CSV
