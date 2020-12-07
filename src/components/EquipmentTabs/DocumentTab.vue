@@ -4,6 +4,46 @@
             <a-button type="primary" @click="addDocument"> 
                 Add Document 
             </a-button>
+            <a-modal title="Add Document" :visible="addDocumentModal" @ok="handleOK" @cancel="handleCancel" >
+                <a-form :form="newDocumentForm">
+                    <a-form-item label="Document Name">
+                        <a-input placeholder="Document Name" 
+                            v-decorator="[
+                                'documentName',
+                                {
+                                    rules: [{
+                                        required: true
+                                    }]
+                                }
+                            ]"
+                        />
+                    </a-form-item>
+                    <a-form-item label="File Upload">
+                        <div class="dropbox">
+                            <a-upload-dragger
+                                v-decorator="[
+                                    'dragger',
+                                    {
+                                        rules: [{
+                                            required: true
+                                        }]
+                                    }
+                                ]"
+                                :multiple="false" 
+                                name="files"
+                                action="/upload.do"
+                            >
+                                <p class="ant-upload-drag-icon">
+                                    <a-icon type="inbox" />
+                                </p>
+                                <p class="ant-upload-text">
+                                    Click or drag your document
+                                </p>
+                            </a-upload-dragger>
+                        </div>
+                    </a-form-item>
+                </a-form>
+            </a-modal>
         </div>
         <a-table :columns="columns" :data-source="data">
             <template v-for="col in ['document']" :slot="col" slot-scope="text, record">
@@ -88,7 +128,9 @@ export default {
             columns,
             editingKey: '',
             tagPopoverVisible: false,
-            newTagName: ""
+            newTagName: "",
+            addDocumentModal: false,
+            newDocumentForm: this.$form.createForm(this, {name: 'new_document_form'}),
         };
     },
 
@@ -142,7 +184,6 @@ export default {
         },
 
         onDelete(key) {
-
             let newData = [...this.data];
             const remaining = newData.filter(item => key !== item.key);
             this.data = remaining;
@@ -154,8 +195,7 @@ export default {
         },
 
         /* ---- Currently Tags are not able to be 'Saved' or 'Cancelled'
-                I think this is fine but should be discussed ---------*/
-                
+                I think this is fine but should be discussed ---------*/    
         addTag(value, key) {
             const newData = [...this.data];
             const target = newData.filter(item => key === item.key)[0];
@@ -180,8 +220,23 @@ export default {
         },
 
         addDocument(){
-            
-        }
+            this.addDocumentModal = true;
+        },
+
+        handleOK(){
+            console.log("OK was chosen");
+            this.handleNewDocument();
+            this.addDocumentModal = false;
+        },
+
+        handleCancel(){
+            console.log("Cancel was chosen");
+            this.addDocumentModal = false;
+        },
+
+        handleNewDocument(){
+            console.log("File Submitted");
+        },
     },
 };
 </script>
