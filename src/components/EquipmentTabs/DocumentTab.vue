@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="buttonHolder" :style="{paddingBottom: '10px'}">
-            <a-button type="primary"> 
+            <a-button type="primary" @click="addDocument"> 
                 Add Document 
             </a-button>
         </div>
@@ -27,7 +27,7 @@
                         <span slot="content">
                             <a-row>
                                 <a-col>
-                                    <a-input v-model="tagName" @pressEnter="e => addTag(e.target.value, record.key)"> </a-input>
+                                    <a-input v-model="newTagName" @pressEnter="e => addTag(e.target.value, record.key)"> </a-input>
                                     <!--<a click="addTag"> Add </a>-->
                                 </a-col>
                             </a-row>
@@ -49,6 +49,11 @@
                         <a @click="() => save(record.key)">
                             Save
                         </a>
+                        <a-popconfirm title="This can not be undone?" @confirm="() => onDelete(record.key)">
+                            <a>
+                                Delete
+                            </a>
+                        </a-popconfirm>
                     </span>
                     <span v-else>
                         <a :disabled="editingKey !== ''" @click="() => edit(record.key)">
@@ -62,10 +67,11 @@
 </template>
 
 <script>
+
 const columns = [
     {title: "Document", dataIndex: "document", scopedSlots: {customRender: 'document'}},
     {title: "Tags", dataIndex: "tags", scopedSlots: {customRender: 'tags'}, align: 'right'},
-    {title: "Action", dataIndex: "action", scopedSlots: {customRender: 'action'}, align: 'right'},
+    {title: "Action", dataIndex: "action", scopedSlots: {customRender: 'action'}, align: 'right', width: '178px'},
 ];
 
 const data = [
@@ -76,95 +82,112 @@ const data = [
 
 export default {
     data() {
-    this.cacheData = data.map(item => ({ ...item }));
-    return {
-      data,
-      columns,
-      editingKey: '',
-      tagPopoverVisible: false,
-      tagName: ""
-    };
-  },
-
-  methods: {
-    handleChange(value, key, column) {
-        const newData = [...this.data];
-        const target = newData.filter(item => key === item.key)[0];
-        if (target) {
-            target[column] = value;
-            this.data = newData;
-        }
+        this.cacheData = data.map(item => ({ ...item }));
+        return {
+            data,
+            columns,
+            editingKey: '',
+            tagPopoverVisible: false,
+            newTagName: ""
+        };
     },
 
-    edit(key) {
-        const newData = [...this.data];
-        const target = newData.filter(item => key === item.key)[0];
-        this.editingKey = key;
-        if (target) {
-            target.editable = true;
-            this.data = newData;
-        }
-    },
+    methods: {
+        handleChange(value, key, column) {
+            const newData = [...this.data];
+            const target = newData.filter(item => key === item.key)[0];
+            if (target) {
+                target[column] = value;
+                this.data = newData;
+            }
+        },
 
-    save(key) {
-        const newData = [...this.data];
-        const newCacheData = [...this.cacheData];
-        const target = newData.filter(item => key === item.key)[0];
-        const targetCache = newCacheData.filter(item => key === item.key)[0];
-        if (target && targetCache) {
-            delete target.editable;
-            this.data = newData;
-            Object.assign(targetCache, target);
-            this.cacheData = newCacheData;
-        }
-        this.editingKey = '';
-    },
+        edit(key) {
+            //Create 'newData' from all the data that is declared
+            const newData = [...this.data];
+            //target = data at index key
+            const target = newData.filter(item => key === item.key)[0];
+            this.editingKey = key;
+            if (target) {
+                //Changes reactivity to show text box
+                target.editable = true;
+                //Populates textboxs with the data?
+                this.data = newData;
+            }
+        },
 
-    cancel(key) {
-        const newData = [...this.data];
-        const target = newData.filter(item => key === item.key)[0];
-        this.editingKey = '';
-        if (target) {
-            Object.assign(target, this.cacheData.filter(item => key === item.key)[0]);
-            delete target.editable;
-            this.data = newData;
-        }
-    },
+        save(key) {
+            const newData = [...this.data];
+            const newCacheData = [...this.cacheData];
+            const target = newData.filter(item => key === item.key)[0];
+            const targetCache = newCacheData.filter(item => key === item.key)[0];
+            if (target && targetCache) {
+                delete target.editable;
+                this.data = newData;
+                Object.assign(targetCache, target);
+                this.cacheData = newCacheData;
+            }
+            this.editingKey = '';
+        },
 
-    addTagPopover() {
-        this.tagPopoverVisible = true;
-    },
+        cancel(key) {
+            const newData = [...this.data];
+            const target = newData.filter(item => key === item.key)[0];
+            this.editingKey = '';
+            if (target) {
+                Object.assign(target, this.cacheData.filter(item => key === item.key)[0]);
+                delete target.editable;
+                this.data = newData;
+            }
+        },
 
-    /* ---- Currently Tags are not able to be 'Saved' or 'Cancelled'
-            I think this is fine but should be discussed ---------*/
+        onDelete(key) {
+
+            let newData = [...this.data];
+            const remaining = newData.filter(item => key !== item.key);
+            this.data = remaining;
+            this.editingKey = '';
+        },
+
+        addTagPopover() {
+            this.tagPopoverVisible = true;
+        },
+
+        /* ---- Currently Tags are not able to be 'Saved' or 'Cancelled'
+                I think this is fine but should be discussed ---------*/
+                
+        addTag(value, key) {
+            const newData = [...this.data];
+            const target = newData.filter(item => key === item.key)[0];
+            if (target) {
+                target.tags.push(value);
+                this.data = newData;
+                this.newTagName = "";
+            }
+        },
+
+        removeTag(e, value, key) {
+            //Stops the default 'remove' of the tag
+            e.preventDefault();
+            //Actually remove the tag from the list
+            const newData = [...this.data];
+            const target = newData.filter(item => key === item.key)[0];
+            if (target) {
+                const index = target.tags.indexOf(value);
+                target.tags.splice(index, 1);
+                this.data = newData;
+            }
+        },
+
+        addDocument(){
             
-    addTag(value, key) {
-        const newData = [...this.data];
-        const target = newData.filter(item => key === item.key)[0];
-        if (target) {
-            target.tags.push(value);
-            this.data = newData;
-            this.tagName = "";
         }
-    },
-
-    removeTag(e, value, key) {
-        //Stops the default 'remove' of the tag
-        e.preventDefault();
-        //Actually remove the tag from the list
-        const newData = [...this.data];
-        const target = newData.filter(item => key === item.key)[0];
-        if (target) {
-            const index = target.tags.indexOf(value);
-            target.tags.splice(index, 1);
-            this.data = newData;
-        }
-    }
     },
 };
 </script>
+
 <style scoped>
 .editable-row-operations a {
-  margin-right: 8px;
+    margin-right: 8px;
 }
 </style>
