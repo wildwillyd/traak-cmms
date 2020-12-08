@@ -57,6 +57,6 @@ export default {
 .logo {
     height: 32px;
     /* background: rgba(255, 255, 255, 0.2); */
-    margin: 16px;
+    margin: 8px;
 }
 </style>
