@@ -7,7 +7,6 @@ import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import VueKonva from 'vue-konva'
 
-
 Vue.config.productionTip = false
 
 Vue.use(VueKonva);

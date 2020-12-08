@@ -1,10 +1,10 @@
 <template>
-    <a-menu mode="inline" :inline-collapsed="collapsed" theme="dark" :defaultSelectedKeys="[1]">
+    <a-menu mode="inline" :inline-collapsed="collapsed" theme="dark">
         <template v-for="item in navigationItems">
             <a-menu-item :key="item.key">
                 <router-link :to="item.link">
-                <a-icon :type="item.iconType" />
-                <span> {{item.spanText}} </span>
+                    <a-icon :type="item.iconType" />
+                    <span> {{item.spanText}} </span>
                 </router-link>
             </a-menu-item>
         </template>
@@ -24,7 +24,7 @@ export default {
                 {key: 4, iconType: "key", spanText: "Inventory", link: "/Inventory"},
                 {key: 5, iconType: "form", spanText: "Reports", link: "/Report"},
                 {key: 6, iconType: "copy", spanText: "Documents", link: "/Document"},
-                {key: 7, iconType: "read", spanText: "Vendors", link: "/Document"},
+                {key: 7, iconType: "read", spanText: "Vendors", link: "/Vendor"},
             ],
             collapsed: false
         }

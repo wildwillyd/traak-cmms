@@ -28,7 +28,7 @@ export default {
                 //If we ever implement swipe gestures this is how we would hide the sidebar icon on phones
                 //visibility: "hidden"
             }
-        }
+        };
     },
     components: {
         NavItem,
@@ -57,6 +57,6 @@ export default {
 .logo {
     height: 32px;
     /* background: rgba(255, 255, 255, 0.2); */
-    margin: 16px;
+    margin: 8px;
 }
 </style>
