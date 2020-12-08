@@ -25,6 +25,7 @@ export default {
                 {key: 5, iconType: "form", spanText: "Reports", link: "/Report"},
                 {key: 6, iconType: "copy", spanText: "Documents", link: "/Document"},
                 {key: 7, iconType: "read", spanText: "Vendors", link: "/Vendor"},
+                {key: 8, iconType: "file-add", spanText: "Upload", link: "/Upload"},
             ],
             collapsed: false
         }
