@@ -8,8 +8,8 @@
 import PolygonLayer from './PolygonLayer.vue';
 
 export default {
-  props:
-    ['CurrentAreaNo'],
+  props: ['CurrentAreaNo'],
+
   components: {
     PolygonLayer
   }

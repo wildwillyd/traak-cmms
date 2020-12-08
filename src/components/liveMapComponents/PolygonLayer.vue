@@ -1,180 +1,177 @@
 <template>
 
-  <v-stage 
-      ref="stage" 
-      :config="stageSize"
-      @mousedown="handleStageMouseDown"
-      @touchstart="handleStageMouseDown"
+    <v-stage 
+        ref="stage" 
+        :config="stageSize"
+        @mousedown="handleStageMouseDown"
+        @touchstart="handleStageMouseDown"
     >
 
-    <v-layer>
+        <v-layer>
+        <MapImg />
+        </v-layer>
 
-      <mapImg CurrentAreaNo = this.CurrentAreaNo></mapImg>
-
-    </v-layer>
-
-    <v-layer ref="layer">
-
-      <v-rect
-        v-for="item in rectangles"
-        :key="item.id"
-        :config="item"
-        @transformend="handleTransformEnd"
-      />
-
-      <v-transformer ref="transformer" />
-
-    </v-layer>
-  </v-stage>
+        <v-layer ref="layer">
+            <v-rect
+                v-for="item in rectangles"
+                :key="item.id"
+                :config="item"
+                @transformend="handleTransformEnd"
+            />
+            <v-transformer ref="transformer" />
+        </v-layer>
+    </v-stage>
 </template>
 
 <script>
-import mapImg from './MapImg.vue';
+import MapImg from './MapImg.vue';
 const width = window.innerWidth;
 const height = window.innerHeight;
 
 export default {
-  props: 
-  ['CurrentAreaNo'],
+    props: ['CurrentAreaNo'],
+
     components: {
-        mapImg
+        MapImg
     },
-  data() {
-    return {
-      stageSize: {
-        width: width,
-        height: height,
-      },
-      rectangles: [
-        {
-          rotation: 0,
-          x: 737.9488695979911,
-          y: 34.86822451433958,
-          width: 100,
-          height: 100,
-          scaleX: 1.7805113040201124,
-          scaleY: 5.856171151216743,
-          fill: 'red',
-          name: 'rect1',
-          draggable: true,
-          opacity: 0.3
-        },
-        {
-          rotation: 0,
-          x: 368.23097709744985,
-          y: 253.3423888333654,
-          width: 100,
-          height: 100,
-          scaleX: 2.494959484233252,
-          scaleY: 2.3594570012600746,
-          fill: 'green',
-          name: 'rect2',
-          draggable: true,
-          opacity: 0.3
-        },
-         {
-          rotation: 0,
-          x: 13.999999999999925,
-          y: 539.0000000000005,
-          width: 100,
-          height: 100,
-          scaleX: 4.772761848800234,
-          scaleY: 1.3013739025922908,
-          fill: 'red',
-          name: 'rect3',
-          draggable: true,
-          opacity: 0.3
-        },
-         {
-          rotation: 0,
-          x: 175.21707198009048,
-          y: 245.21788100016988,
-          width: 100,
-          height: 100,
-          scaleX: 1.4478292801990866,
-          scaleY: 2.617821189998313,
-          fill: 'green',
-          name: 'rect4',
-          draggable: true,
-          opacity: 0.3
-        },
-         {
-          rotation: 0,
-          x: 14.000000000000007,
-          y: 42.00000000000004,
-          width: 100,
-          height: 100,
-          scaleX: 1.8269773373458313,
-          scaleY: 1.8480603225384533,
-          fill: 'blue',
-          name: 'rect5',
-          draggable: true,
-          opacity: 0.3
-        },
-      ],
-      selectedShapeName: '',
-    };
-  },
-  methods: {
-    handleTransformEnd(e) {
-      // shape is transformed, let us save new attrs back to the node
-      // find element in our state
-      const rect = this.rectangles.find(
-        (r) => r.name === this.selectedShapeName
-      );
-      // update the state
-      rect.x = e.target.x();
-      rect.y = e.target.y();
-      rect.rotation = e.target.rotation();
-      rect.scaleX = e.target.scaleX();
-      rect.scaleY = e.target.scaleY();
+
+    data() {
+        return {
+            stageSize: {
+                width: width,
+                height: height,
+            },
+            rectangles: [
+                {
+                    rotation: 0,
+                    x: 737.9488695979911,
+                    y: 34.86822451433958,
+                    width: 100,
+                    height: 100,
+                    scaleX: 1.7805113040201124,
+                    scaleY: 5.856171151216743,
+                    fill: 'red',
+                    name: 'rect1',
+                    draggable: true,
+                    opacity: 0.3
+                },
+                {
+                    rotation: 0,
+                    x: 368.23097709744985,
+                    y: 253.3423888333654,
+                    width: 100,
+                    height: 100,
+                    scaleX: 2.494959484233252,
+                    scaleY: 2.3594570012600746,
+                    fill: 'green',
+                    name: 'rect2',
+                    draggable: true,
+                    opacity: 0.3
+                },
+                {
+                    rotation: 0,
+                    x: 13.999999999999925,
+                    y: 539.0000000000005,
+                    width: 100,
+                    height: 100,
+                    scaleX: 4.772761848800234,
+                    scaleY: 1.3013739025922908,
+                    fill: 'red',
+                    name: 'rect3',
+                    draggable: true,
+                    opacity: 0.3
+                },
+                {
+                    rotation: 0,
+                    x: 175.21707198009048,
+                    y: 245.21788100016988,
+                    width: 100,
+                    height: 100,
+                    scaleX: 1.4478292801990866,
+                    scaleY: 2.617821189998313,
+                    fill: 'green',
+                    name: 'rect4',
+                    draggable: true,
+                    opacity: 0.3
+                },
+                {
+                    rotation: 0,
+                    x: 14.000000000000007,
+                    y: 42.00000000000004,
+                    width: 100,
+                    height: 100,
+                    scaleX: 1.8269773373458313,
+                    scaleY: 1.8480603225384533,
+                    fill: 'blue',
+                    name: 'rect5',
+                    draggable: true,
+                    opacity: 0.3
+                },
+            ],
+            selectedShapeName: '',
+        };
     },
-    handleStageMouseDown(e) {
-      // clicked on stage - clear selection
-      if (e.target === e.target.getStage()) {
-        this.selectedShapeName = '';
-        this.updateTransformer();
-        return;
-      }
+    methods: {
+        handleTransformEnd(e) {
+            // shape is transformed, let us save new attrs back to the node
+            // find element in our state
+            const rect = this.rectangles.find(
+                (r) => r.name === this.selectedShapeName
+            );
+            // update the state
+            rect.x = e.target.x();
+            rect.y = e.target.y();
+            rect.rotation = e.target.rotation();
+            rect.scaleX = e.target.scaleX();
+            rect.scaleY = e.target.scaleY();
+        },
 
-      // clicked on transformer - do nothing
-      const clickedOnTransformer =
-        e.target.getParent().className === 'Transformer';
-      if (clickedOnTransformer) {
-        return;
-      }
+        handleStageMouseDown(e) {
+            // clicked on stage - clear selection
+            if (e.target === e.target.getStage()) {
+                this.selectedShapeName = '';
+                this.updateTransformer();
+                return;
+            }
 
-      // find clicked rect by its name
-      const name = e.target.name();
-      const rect = this.rectangles.find((r) => r.name === name);
-      if (rect) {
-        this.selectedShapeName = name;
-      } else {
-        this.selectedShapeName = '';
-      }
-      this.updateTransformer();
+            // clicked on transformer - do nothing
+            const clickedOnTransformer = e.target.getParent().className === 'Transformer';
+            if (clickedOnTransformer) {
+                return;
+            }
+
+            // find clicked rect by its name
+            const name = e.target.name();
+            const rect = this.rectangles.find((r) => r.name === name);
+            if (rect) {
+                this.selectedShapeName = name;
+            } else {
+                this.selectedShapeName = '';
+            }
+            this.updateTransformer();
+        },
+
+        updateTransformer() {
+            // here we need to manually attach or detach Transformer node
+            const transformerNode = this.$refs.transformer.getNode();
+            const stage = transformerNode.getStage();
+            const { selectedShapeName } = this;
+
+            const selectedNode = stage.findOne('.' + selectedShapeName);
+            // do nothing if selected node is already attached
+            if (selectedNode === transformerNode.node()) {
+                return;
+            }
+
+            if (selectedNode) {
+                // attach to another node
+                transformerNode.nodes([selectedNode]);
+            } else {
+                // remove transformer
+                transformerNode.nodes([]);
+            }
+            transformerNode.getLayer().batchDraw();
+        },
     },
-    updateTransformer() {
-      // here we need to manually attach or detach Transformer node
-      const transformerNode = this.$refs.transformer.getNode();
-      const stage = transformerNode.getStage();
-      const { selectedShapeName } = this;
-
-      const selectedNode = stage.findOne('.' + selectedShapeName);
-      // do nothing if selected node is already attached
-      if (selectedNode === transformerNode.node()) {
-        return;
-      }
-
-      if (selectedNode) {
-        // attach to another node
-        transformerNode.nodes([selectedNode]);
-      } else {
-        // remove transformer
-        transformerNode.nodes([]);
-      }
-      transformerNode.getLayer().batchDraw();
-    },
-  },
 };
 </script>
