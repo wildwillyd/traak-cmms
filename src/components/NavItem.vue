@@ -1,10 +1,10 @@
 <template>
-    <a-menu mode="inline" :inline-collapsed="collapsed" theme="dark" :defaultSelectedKeys="[1]">
+    <a-menu mode="inline" :inline-collapsed="collapsed" theme="dark">
         <template v-for="item in navigationItems">
             <a-menu-item :key="item.key">
                 <router-link :to="item.link">
-                <a-icon :type="item.iconType" />
-                <span> {{item.spanText}} </span>
+                    <a-icon :type="item.iconType" />
+                    <span> {{item.spanText}} </span>
                 </router-link>
             </a-menu-item>
         </template>
