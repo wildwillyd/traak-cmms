@@ -1,12 +1,18 @@
 <template>
     <div>
         <a-table :columns="columns" :dataSource="data">
-        <span  slot="title"> 
-            <a-input-search placeholder="Search Name" :style="{width: '200px', float: 'left'}" /> 
-            <div id="buttonHolder">
-                <a-button type="primary"> Sort </a-button>
-                <a-button type="primary"> Edit </a-button>
-            </div>
+        <span slot="title"> 
+            <a-row>
+                <a-col :span="8">
+                    <a-input-search placeholder="Search Name" :style="{width: '200px'}" /> 
+                </a-col>
+                <a-col :span="8" :offset="8">
+                    <div id="buttonHolder">
+                        <a-button type="primary"> Sort </a-button>
+                        <a-button type="primary"> Edit </a-button>
+                    </div>
+                </a-col>
+            </a-row>
         </span>
         </a-table>
     </div>
@@ -54,16 +60,4 @@ export default {
 </script>
 
 <style scoped>
-.header {
-    width: 200px;
-    float: left;
-}
-
-.buttonHolder {
-    width: auto;
-    float: right;
-}
-
-
-
 </style>
