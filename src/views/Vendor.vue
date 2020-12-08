@@ -14,17 +14,23 @@
                     </a-col>
                 </a-row>
             </span>
+            <span slot="name" slot-scope="text">
+                <a @click="vendorModalVisible = true"> {{text}} </a>
+            </span>
             <a-table slot="expandedRowRender" :columns="itemColumns" :dataSource="itemData" :pagination="false">
-                
+
             </a-table>
         </a-table>
+        <VendorModal @closeModal="vendorModalVisible = false" :visible="vendorModalVisible" />
     </div>
 </template>
 
 <script>
 
+import VendorModal from '@/components/VendorComponents/VendorModal.vue';
+
 const vendorColumns = [
-    { title: "Vendor Name", dataIndex: "vendorName"},
+    { title: "Vendor Name", dataIndex: "vendorName", scopedSlots: {customRender: 'name'}},
     { title: "Location", dataIndex: "location"},
     { title: "Main Contact", dataIndex: "mainContact"},
 ];
@@ -54,14 +60,24 @@ const itemData = [
 
 export default {
     name: "Vendor",
+
+    components: {
+        VendorModal
+    },
+
     data() {
         return {
             vendorColumns,
             itemColumns,
             vendorData,
             itemData,
+            vendorModalVisible: false,
         };
-    }
+    },
+
+    methods: {
+
+    },
 }
 </script>
 
