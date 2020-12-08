@@ -1,8 +1,13 @@
 <template>
     <a-layout>
-        <a-layout-header :theme="light">
-            Here is the header
+        <a-layout-header :style="{backgroundColor: 'lightgray'}">
+            <a-row>
+                <a-col :offset="22" :span="2">
+                    <a-button type="primary" @click="mapDrawerVisible = true"> Drawer </a-button>
+                </a-col>
+            </a-row>
         </a-layout-header>
+        <MapDrawer :visible="mapDrawerVisible" @closeDrawer="mapDrawerVisible = false" />
         <a-layout-content>
             <LiveMap :CurrentAreaNo="AreaNo" />
         </a-layout-content>
@@ -25,22 +30,20 @@
 </template>
 
 <script>
+import LiveMap from '../components/liveMapComponents/LiveMap.vue'
+import MapDrawer from '@/components/liveMapComponents/MapDrawer.vue'
 
 let AreaNo = 0;
 
-//import Radio from '../components/liveMapComponents/Radio.vue'
-import LiveMap from '../components/liveMapComponents/LiveMap.vue'
-//import Tree from '../components/liveMapComponents/Tree.vue'
-
 export default {
     components: {
-        //Radio,
         LiveMap,
-        //Tree
+        MapDrawer,
     },
     data() {
         return{
-            AreaNo
+            AreaNo,
+            mapDrawerVisible: false,
         }
     },
     created(){
