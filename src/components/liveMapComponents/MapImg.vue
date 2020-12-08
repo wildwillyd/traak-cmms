@@ -49,17 +49,6 @@ export default {
         height: 900
       }
     },
-    mapImage(){
-      const image = new window.Image();
-      image.src = items[this.$store.getters.getMapState].path;
-      image.onload = () => {
-        //set image only when it is loaded
-        console.log("Image loaded")
-        this.image = image;
-      };
-      console.log("returning image");
-      return image;
-    }
   },
   mounted() {
     this.image.src = require(items[this.$store.getters.getMapState].path);
