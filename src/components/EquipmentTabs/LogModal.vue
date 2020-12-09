@@ -1,10 +1,10 @@
 <template>
-    <a-modal title="Add Document" :visible="visible" @ok="handleOK" @cancel="handleCancel" >
-        <a-form :form="newDocumentForm">
-            <a-form-item label="Document Name">
-                <a-input placeholder="Document Name" 
+    <a-modal :visible="visible" title="Add New Log" @ok="handleOK" @cancel="handleCancel">
+        <a-form :form="newLogForm">
+            <a-form-item label="Summary">
+                <a-input placeholder="Summary" 
                     v-decorator="[
-                        'documentName',
+                        'Summary',
                         {
                             rules: [{
                                 required: true
@@ -13,19 +13,26 @@
                     ]"
                 />
             </a-form-item>
-            <a-form-item label="File Upload">
-                <div class="dropbox">
-                    <a-upload-dragger
+            <a-form-item label="Description">
+                <a-input type="textarea" placeholder="Description" style="height: 125px"
                     v-decorator="[
-                        'dragger',
+                        'Description',
                         {
                             rules: [{
                                 required: true
                             }]
                         }
                     ]"
+                />
+            </a-form-item>
+            <a-form-item label="Image Upload">
+                <div class="dropbox">
+                    <a-upload-dragger
+                    v-decorator="[
+                        'dragger',
+                    ]"
                     :multiple="false" 
-                    name="files"
+                    name="image"
                     action="/upload.do"
                     >
                         <p class="ant-upload-drag-icon">
@@ -43,17 +50,17 @@
 
 <script>
 export default {
-    name: "DocumentModal",
+    name: "LogModal",
     data() {
         return {
-            newDocumentForm: this.$form.createForm(this, {name: 'new_document_form'}),
-        };
+            newLogForm: this.$form.createForm(this, {name: 'new_log_form'}),
+        }
     },
     props: ['visible'],
     methods: {
         handleOK(){
-            console.log("OK was clicked");
-            this.newDocumentForm.validateFields((err, values) => {
+            console.log("OK was selected");
+            this.newLogForm.validateFields((err, values) => {
                 if(!err) {
                     console.log(values);
                     this.$emit('closeModal');
@@ -61,9 +68,10 @@ export default {
             });
         },
         handleCancel(){
-            console.log("Cancel was clicked");
-            this.$emit("closeModal");
+            console.log("Cancel was selected");
+            this.$emit('closeModal')
         }
-    }
+    },
+
 }
 </script>
