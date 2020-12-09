@@ -72,8 +72,8 @@
 import DocumentModal from '@/components/EquipmentTabs/DocumentModal.vue';
 
 const columns = [
-    {title: "Document", dataIndex: "document", scopedSlots: {customRender: 'document'}},
-    {title: "Tags", dataIndex: "tags", scopedSlots: {customRender: 'tags'}, align: 'right'},
+    {title: "Document", dataIndex: "document", scopedSlots: {customRender: 'document'}, width: '50%'},
+    {title: "Tags", dataIndex: "tags", scopedSlots: {customRender: 'tags'}, align: 'right', width: '30%'},
     {title: "Action", dataIndex: "action", scopedSlots: {customRender: 'action'}, align: 'right', width: '178px'},
 ];
 

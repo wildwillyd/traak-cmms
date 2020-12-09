@@ -6,14 +6,10 @@
                         <a-col :span="8">
                             <a-input-search placeholder="Search Vendor" :style="{width: '200px'}" @search="searchVendors"/> 
                         </a-col>
-                        <!--
-                        <a-col :span="8" :offset="8">
+                        
+                        <a-col :span="4" :offset="12">
                             <a-button-group>
-                                <template v-if="editing">
-                                    <a-button @click="handleCancel"> Cancel </a-button>
-                                    <a-button > Save </a-button>
-                                </template>
-                                <a-button v-else @click="edit"> Edit </a-button>
+                                <a-button type="primary" @click="addVendorModalVisible = true"> Add Vendor </a-button>
                             </a-button-group>
                         </a-col> 
                         -->
@@ -44,9 +40,12 @@
             <template slot="operation" slot-scope="text, record">
                 <div class="editable-row-operations">
                     <span v-if="record.editable">
-                        <a @click="() => save(record.key)">Save</a>
                         <a-popconfirm title="Sure to cancel?" @confirm="() => cancel(record.key)">
                             <a>Cancel</a>
+                        </a-popconfirm>
+                        <a @click="() => save(record.key)">Save</a>
+                        <a-popconfirm title="Cannot Undo Delete?" @confirm="() => onDelete(record.key)">
+                            <a>Delete</a>
                         </a-popconfirm>
                     </span>
                     <span v-else>
@@ -56,18 +55,20 @@
             </template>
             <a-table slot="expandedRowRender" :columns="itemColumns" :dataSource="itemData" :pagination="false" />
         </a-table>
+        <AddVendorModal @closeModal="addVendorModalVisible = false" :visible="addVendorModalVisible" />
         <VendorModal @closeModal="vendorModalVisible = false" :visible="vendorModalVisible" />
     </div>
 </template>
 
 <script>
 import VendorModal from '@/components/VendorComponents/VendorModal.vue';
+import AddVendorModal from '@/components/VendorComponents/AddVendorModal.vue';
 
 const vendorColumns = [
     {
         title: 'Vendor Name',
         dataIndex: 'vendorName',
-        width: '25%',
+        width: '30%',
         scopedSlots: { customRender: 'vendorName' },
         sorter: (a, b) => a.vendorName.localeCompare(b.vendorName), 
         sortDirection: ['Ascend', 'Descend']
@@ -75,7 +76,7 @@ const vendorColumns = [
     {
         title: 'Location',
         dataIndex: 'location',
-        width: '15%',
+        width: '25%',
         scopedSlots: { customRender: 'location' },
         sorter: (a, b) => a.location.localeCompare(b.location), 
         sortDirection: ['Ascend', 'Descend']
@@ -83,14 +84,15 @@ const vendorColumns = [
     {
         title: 'Main Contact',
         dataIndex: 'mainContact',
-        width: '40%',
+        width: '15%',
         scopedSlots: { customRender: 'mainContact' },
         sorter: (a, b) => a.mainContact.localeCompare(b.mainContact), 
         sortDirection: ['Ascend', 'Descend']
     },
     {
-        title: 'operation',
+        title: 'Actions',
         dataIndex: 'operation',
+        width: '178px',
         scopedSlots: { customRender: 'operation' },
     },
 ];
@@ -128,11 +130,13 @@ export default {
             itemColumns,
             itemData,
             vendorModalVisible: false,
+            addVendorModalVisible: false,
             editingKey: '',
         };
     },
     components: {
-        VendorModal
+        VendorModal,
+        AddVendorModal,
     },
     methods: {
         searchVendors(value){
@@ -181,6 +185,14 @@ export default {
                 delete target.editable;
                 this.data = newData;
             }
+        },
+        /* This is bugged - if you delete something and then search for it, then clear the search the delete item shows back up */
+        onDelete(key) {
+            let newData = [...this.data];
+            const remaining = newData.filter(item => key !== item.key);
+            this.predata = remaining;
+            this.data = this.predata;
+            this.editingKey = '';
         },
     },
 };
