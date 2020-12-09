@@ -1,10 +1,10 @@
 <template>
     <div>
-        <a-table :columns="vendorColumns" :dataSource="vendorData">
+        <a-table :columns="vendorColumns" :dataSource="searchedVendorData">
             <span slot="title"> 
                 <a-row>
                     <a-col :span="8">
-                        <a-input-search placeholder="Search Name" :style="{width: '200px'}" /> 
+                        <a-input-search placeholder="Search Vendor" :style="{width: '200px'}" @search="searchVendors"/> 
                     </a-col>
                     <a-col :span="8" :offset="8">
                         <a-button-group>
@@ -72,11 +72,18 @@ export default {
             vendorData,
             itemData,
             vendorModalVisible: false,
+            searchedVendorData: vendorData
         };
     },
 
     methods: {
-
+        searchVendors(value){
+            if (value == "") {
+                this.searchedVendorData = vendorData;
+                return;
+            }
+            this.searchedVendorData = this.vendorData.filter(vendor => vendor.vendorName === value);
+        }
     },
 }
 </script>
