@@ -7,18 +7,20 @@
     @close="onClose"
     >
         <MapFilter v-if="type == false"/>
-        <p v-else> Alternate Content </p>
+        <MapItems v-else />
     </a-drawer>
 </template>
 
 <script>
 import MapFilter from '@/components/liveMapComponents/MapFilter.vue'
+import MapItems from '@/components/liveMapComponents/MapItems.vue'
 
 export default {
     name: "MapDrawer",
     props: ['visible', 'type'],
     components: {
         MapFilter,
+        MapItems
     },
     computed: {
         title(){
