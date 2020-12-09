@@ -1,29 +1,32 @@
 <template>
-    <a-menu mode="inline"  >
-        <template v-for="item in navigationItems">
-            <a-menu-item :key="item.key" @click="() => changeMap(item.key)">
-                <span> {{item.spanText}} </span>
-            </a-menu-item>
-        </template>
-    </a-menu>
+    <div>
+        <a-select :defaultValue="this.$store.getters.getMapState" style="width: 240px" @change="changeMap">
+            <template v-for="map in maps">
+                <a-select-option :key="map.key" :value="map.key">
+                    {{map.value}}
+                </a-select-option>
+            </template>
+        </a-select>
+    </div>
 </template>
 
 <script>
+
+const maps = [
+    {key: 1, value: "k-12 Building", link: "0"},
+    {key: 2, value: "Elementary & Admin", link: '1'},
+    {key: 3, value: "2nd Floor Elementary", link: "2"},
+    {key: 4, value: "High School", link: "3"},
+    {key: 5, value: "2nd Floor High School", link: "4"},
+    {key: 6, value: "Gymnasium", link: "5"},
+    {key: 7, value: "Cafeteria & Music", link: "6"},
+];
 
 export default {
     name: "MapSelect",
     data () {
         return {
-            //Eventually return these from a store via a computed value
-            navigationItems: [
-                {key: 1, spanText: "k-12 Building", link: "0"},
-                {key: 2, spanText: "Elementary & Admin", link: '1'},
-                {key: 3, spanText: "2nd Floor Elementary", link: "2"},
-                {key: 4, spanText: "High School", link: "3"},
-                {key: 5, spanText: "2nd Floor High School", link: "4"},
-                {key: 6, spanText: "Gymnasium", link: "5"},
-                {key: 7, spanText: "Cafeteria & Music", link: "6"},
-            ],
+            maps
         }
     },
     methods: {

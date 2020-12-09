@@ -1,31 +1,30 @@
 <template>
     <a-drawer 
-    title="Filter"
+    :title="title"
     placement="right"
     :closable="true"
     :visible="visible"
     @close="onClose"
     >
-        Facilities
-        <div :style="{paddingBottom: '50px'}">
-        <MapSelect />
-        </div>
-        
-        Selected Facility Equipment:
-        <Tree />
+        <MapFilter v-if="type == false"/>
+        <p v-else> Alternate Content </p>
     </a-drawer>
 </template>
 
 <script>
-import Tree from '@/components/liveMapComponents/Tree.vue'
-import MapSelect from '@/components/liveMapComponents/MapSelect.vue'
+import MapFilter from '@/components/liveMapComponents/MapFilter.vue'
 
 export default {
     name: "MapDrawer",
-    props: ['visible'],
+    props: ['visible', 'type'],
     components: {
-        Tree,
-        MapSelect
+        MapFilter,
+    },
+    computed: {
+        title(){
+            if (!this.type) return "Filter";
+            return "All Items";
+        }
     },
     methods: {
         onClose(){
