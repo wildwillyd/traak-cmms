@@ -5,10 +5,11 @@
         :config="stageSize"
         @mousedown="handleStageMouseDown"
         @touchstart="handleStageMouseDown"
+        @wheel="handleWheel"
     >
 
         <v-layer>
-        <MapImg />
+        <MapImg @stageSize="stageSizeMutator"/>
         </v-layer>
 
         <v-layer ref="layer">
@@ -112,6 +113,11 @@ export default {
         };
     },
     methods: {
+
+        stageSizeMutator(width, height){
+            this.stageSize.width = width;
+            this.stageSize.height = height;
+        },
         handleTransformEnd(e) {
             // shape is transformed, let us save new attrs back to the node
             // find element in our state
@@ -149,6 +155,9 @@ export default {
                 this.selectedShapeName = '';
             }
             this.updateTransformer();
+        },
+        handleWheel(e) {
+           return e;
         },
 
         updateTransformer() {

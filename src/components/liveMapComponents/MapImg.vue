@@ -4,9 +4,6 @@
 
 <script>
 
-const width = window.innerWidth;
-const height = window.innerHeight;
-
 let items= [
     {path: require('../../assets/liveMapAssets/A701-1.png')},
     {path: require('../../assets/liveMapAssets/A801-1.png')},
@@ -22,11 +19,9 @@ export default {
     data() {
         return {
             items,
-            stageSize: {
-                width: width,
-                height: height
-            },
-            image: null
+            image: null,
+            height: null,
+            width: null
         };
     },
     created() {
@@ -35,6 +30,9 @@ export default {
         image.onload = () => {
             //set image only when it is loaded
             this.image = image;
+            this.width = image.width;
+            this.height = image.height;
+            this.$emit('stageSize', this.width, this.height);
         };
     },
 
@@ -44,14 +42,14 @@ export default {
                 x: 0,
                 y: 0,
                 image: this.image,
-                width: 900,
-                height: 900
+                width: this.width,
+                height: this.height
             }
         },
     },
 
     mounted() {
-        this.image.src = require(items[this.$store.getters.getMapState].path);
+        this.image.src = (items[this.$store.getters.getMapState].path);
     }
 };
 </script>
