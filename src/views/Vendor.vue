@@ -12,7 +12,6 @@
                                 <a-button type="primary" @click="addVendorModalVisible = true"> Add Vendor </a-button>
                             </a-button-group>
                         </a-col> 
-                        -->
                     </a-row>
                 </span>
             <template
