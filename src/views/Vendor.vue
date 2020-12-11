@@ -28,7 +28,7 @@
                 />
                 <template v-else>
                     <template v-if="col == 'vendorName'">
-                        <a @click="vendorModalVisible = true"> {{text}} </a>
+                        <a @click="selVendorName = text; vendorModalVisible = true"> {{text}} </a>
                     </template>
                     <template v-else>
                         {{ text }}
@@ -55,7 +55,7 @@
             <a-table slot="expandedRowRender" :columns="itemColumns" :dataSource="itemData" :pagination="false" />
         </a-table>
         <AddVendorModal @closeModal="addVendorModalVisible = false" :visible="addVendorModalVisible" />
-        <VendorModal @closeModal="vendorModalVisible = false" :visible="vendorModalVisible" />
+        <VendorModal @closeModal="vendorModalVisible = false" :visible="vendorModalVisible" :vendorName="selVendorName"/>
     </div>
 </template>
 
@@ -67,7 +67,7 @@ const vendorColumns = [
     {
         title: 'Vendor Name',
         dataIndex: 'vendorName',
-        width: '30%',
+        width: '25%',
         scopedSlots: { customRender: 'vendorName' },
         sorter: (a, b) => a.vendorName.localeCompare(b.vendorName), 
         sortDirection: ['Ascend', 'Descend']
@@ -131,6 +131,7 @@ export default {
             vendorModalVisible: false,
             addVendorModalVisible: false,
             editingKey: '',
+            selVendorName: ""
         };
     },
     components: {
