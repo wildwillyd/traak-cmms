@@ -28,7 +28,7 @@
                 />
                 <template v-else>
                     <template v-if="col == 'vendorName'">
-                        <a @click="vendorModalVisible = true"> {{text}} </a>
+                        <a @click="selVendorName = text; vendorModalVisible = true"> {{text}} </a>
                     </template>
                     <template v-else>
                         {{ text }}
@@ -55,7 +55,7 @@
             <a-table slot="expandedRowRender" :columns="itemColumns" :dataSource="itemData" :pagination="false" />
         </a-table>
         <AddVendorModal @closeModal="addVendorModalVisible = false" :visible="addVendorModalVisible" />
-        <VendorModal @closeModal="vendorModalVisible = false" :visible="vendorModalVisible" />
+        <VendorModal @closeModal="vendorModalVisible = false" :visible="vendorModalVisible" :vendorName="selVendorName"/>
     </div>
 </template>
 
@@ -75,7 +75,7 @@ const vendorColumns = [
     {
         title: 'Location',
         dataIndex: 'location',
-        width: '25%',
+        width: '30%',
         scopedSlots: { customRender: 'location' },
         sorter: (a, b) => a.location.localeCompare(b.location), 
         sortDirection: ['Ascend', 'Descend']
@@ -83,7 +83,7 @@ const vendorColumns = [
     {
         title: 'Main Contact',
         dataIndex: 'mainContact',
-        width: '15%',
+        width: '30%',
         scopedSlots: { customRender: 'mainContact' },
         sorter: (a, b) => a.mainContact.localeCompare(b.mainContact), 
         sortDirection: ['Ascend', 'Descend']
@@ -91,7 +91,7 @@ const vendorColumns = [
     {
         title: 'Actions',
         dataIndex: 'operation',
-        width: '178px',
+        align: 'right',
         scopedSlots: { customRender: 'operation' },
     },
 ];
@@ -131,6 +131,7 @@ export default {
             vendorModalVisible: false,
             addVendorModalVisible: false,
             editingKey: '',
+            selVendorName: ""
         };
     },
     components: {
