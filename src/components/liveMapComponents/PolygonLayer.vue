@@ -1,8 +1,8 @@
 <template>
 
     <v-stage 
-        ref="stage" 
-        :config="stageSize"
+        ref="stageObject"
+        :config="stage"
         @mousedown="handleStageMouseDown"
         @touchstart="handleStageMouseDown"
         
@@ -32,7 +32,6 @@ const width = window.innerWidth;
 const height = window.innerHeight;
 //const scaleBy = 1.01;
 //disabled bc zoom is hella broke
-
 export default {
     props: ['CurrentAreaNo'],
 
@@ -42,7 +41,7 @@ export default {
 
     data() {
         return {
-            stageSize: {
+            stage: {
                 width: width,
                 height: height,
             },
@@ -119,8 +118,8 @@ export default {
     methods: {
 
         stageSizeMutator(width, height){
-            this.stageSize.width = width;
-            this.stageSize.height = height;
+            this.stage.width = width;
+            this.stage.height = height;
         },
 
         handleTransformEnd(e) {
@@ -217,16 +216,19 @@ export default {
 
     computed: mapState(['currentMap']),
 
-    created() {
-        const stage = this.$refs.MapImg.getStage();
+    mounted() {
+        //const stage = this.$refs.stageObject.getNode();
+        
         this.unsubscribe = this.$store.subscribe((mutation, state) => {
-        if (mutation.type === 'changeMap') {
-            console.log(`Updating to ${state.currentMap}`);
-
-            // Do whatever makes sense now
-            console.log("Redrawing stage...");
-            stage.draw();
-        }
+            if (mutation.type === 'changeMap') {
+                console.log(`Updating to ${state.currentMap}`);
+                const stage = this.$refs.stageObject.getNode();
+                console.log(stage);
+                // Do whatever makes sense now
+                console.log("Redrawing stage...");
+                stage.draw();
+                //this.stage.visible = true;
+            }
         });
     },
     beforeDestroy() {
