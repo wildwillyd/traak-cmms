@@ -5,10 +5,11 @@
         :config="stageSize"
         @mousedown="handleStageMouseDown"
         @touchstart="handleStageMouseDown"
-        @wheel="handleWheel"
+        
     >
+    <!-- @wheel="handleWheel" goes above once implementing zoom-->
 
-        <v-layer>
+        <v-layer ref="mapImgLayer">
         <MapImg @stageSize="stageSizeMutator"/>
         </v-layer>
 
@@ -26,8 +27,11 @@
 
 <script>
 import MapImg from './MapImg.vue';
+import {mapState} from 'vuex';
 const width = window.innerWidth;
 const height = window.innerHeight;
+//const scaleBy = 1.01;
+//disabled bc zoom is hella broke
 
 export default {
     props: ['CurrentAreaNo'],
@@ -118,6 +122,7 @@ export default {
             this.stageSize.width = width;
             this.stageSize.height = height;
         },
+
         handleTransformEnd(e) {
             // shape is transformed, let us save new attrs back to the node
             // find element in our state
@@ -156,9 +161,36 @@ export default {
             }
             this.updateTransformer();
         },
+
+        /*
+
+        Don't use the scroll wheel on the canvas until this is fixed, or your computer will shit itself.
+
         handleWheel(e) {
-           return e;
+           const stage = e.target.getStage();
+
+           var oldScale = stage.scaleX;
+
+           var pointer = stage.getPointerPosition();
+
+           var mousePointTo = {
+              x: (pointer.x - stage.x()) / oldScale,
+              y: (pointer.y - stage.y()) / oldScale,
+            };
+
+            var newScale =
+              e.evt.deltaY > 0 ? oldScale * scaleBy : oldScale / scaleBy;
+
+            stage.scale({ x: newScale, y: newScale });
+
+            var newPos = {
+              x: pointer.x - mousePointTo.x * newScale,
+              y: pointer.y - mousePointTo.y * newScale,
+            };
+            stage.position(newPos);
+            stage.batchDraw();
         },
+        */
 
         updateTransformer() {
             // here we need to manually attach or detach Transformer node
@@ -181,6 +213,24 @@ export default {
             }
             transformerNode.getLayer().batchDraw();
         },
+    },
+
+    computed: mapState(['currentMap']),
+
+    created() {
+        const stage = this.$refs.MapImg.getStage();
+        this.unsubscribe = this.$store.subscribe((mutation, state) => {
+        if (mutation.type === 'changeMap') {
+            console.log(`Updating to ${state.currentMap}`);
+
+            // Do whatever makes sense now
+            console.log("Redrawing stage...");
+            stage.draw();
+        }
+        });
+    },
+    beforeDestroy() {
+        this.unsubscribe();
     },
 };
 </script>
