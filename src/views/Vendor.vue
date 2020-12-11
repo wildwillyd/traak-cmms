@@ -67,7 +67,7 @@ const vendorColumns = [
     {
         title: 'Vendor Name',
         dataIndex: 'vendorName',
-        width: '25%',
+        width: '30%',
         scopedSlots: { customRender: 'vendorName' },
         sorter: (a, b) => a.vendorName.localeCompare(b.vendorName), 
         sortDirection: ['Ascend', 'Descend']
@@ -75,7 +75,7 @@ const vendorColumns = [
     {
         title: 'Location',
         dataIndex: 'location',
-        width: '25%',
+        width: '30%',
         scopedSlots: { customRender: 'location' },
         sorter: (a, b) => a.location.localeCompare(b.location), 
         sortDirection: ['Ascend', 'Descend']
@@ -83,7 +83,7 @@ const vendorColumns = [
     {
         title: 'Main Contact',
         dataIndex: 'mainContact',
-        width: '15%',
+        width: '30%',
         scopedSlots: { customRender: 'mainContact' },
         sorter: (a, b) => a.mainContact.localeCompare(b.mainContact), 
         sortDirection: ['Ascend', 'Descend']
@@ -91,7 +91,7 @@ const vendorColumns = [
     {
         title: 'Actions',
         dataIndex: 'operation',
-        width: '178px',
+        align: 'right',
         scopedSlots: { customRender: 'operation' },
     },
 ];
