@@ -5,35 +5,40 @@
         :config="stage"
         @mousedown="handleStageMouseDown"
         @touchstart="handleStageMouseDown"
-        
+        @wheel="handleWheel"
     >
-    <!-- @wheel="handleWheel" goes above once implementing zoom-->
 
         <v-layer ref="mapImgLayer">
-        <MapImg @stageSize="stageSizeMutator"/>
+
+            <MapImg @stageSize="stageSizeMutator"/>
+
         </v-layer>
 
         <v-layer ref="layer">
+
             <v-rect
                 v-for="item in rectangles"
                 :key="item.id"
                 :config="item"
                 @transformend="handleTransformEnd"
             />
+
             <v-transformer ref="transformer" />
         </v-layer>
     </v-stage>
 </template>
 
 <script>
+
 import MapImg from './MapImg.vue';
-import {mapState} from 'vuex';
+
+
 const width = window.innerWidth;
 const height = window.innerHeight;
-//const scaleBy = 1.01;
-//disabled bc zoom is hella broke
+const scaleBy = 1.1; //for scrollwheel scaling
+
+
 export default {
-    props: ['CurrentAreaNo'],
 
     components: {
         MapImg
@@ -42,8 +47,13 @@ export default {
     data() {
         return {
             stage: {
+                x: 0,
+                y: 0,
                 width: width,
                 height: height,
+                draggable: true,
+                scaleX : 1,
+                scaleY : 1
             },
             rectangles: [
                 {
@@ -161,16 +171,18 @@ export default {
             this.updateTransformer();
         },
 
-        /*
-
-        Don't use the scroll wheel on the canvas until this is fixed, or your computer will shit itself.
 
         handleWheel(e) {
            const stage = e.target.getStage();
 
-           var oldScale = stage.scaleX;
+           var oldScale = stage.scaleX();
 
            var pointer = stage.getPointerPosition();
+
+            console.log(pointer.x);
+            console.log(pointer.y);
+            console.log(e.evt.deltaY);
+            console.log(oldScale);
 
            var mousePointTo = {
               x: (pointer.x - stage.x()) / oldScale,
@@ -189,7 +201,7 @@ export default {
             stage.position(newPos);
             stage.batchDraw();
         },
-        */
+
 
         updateTransformer() {
             // here we need to manually attach or detach Transformer node
@@ -212,27 +224,6 @@ export default {
             }
             transformerNode.getLayer().batchDraw();
         },
-    },
-
-    computed: mapState(['currentMap']),
-
-    mounted() {
-        //const stage = this.$refs.stageObject.getNode();
-        
-        this.unsubscribe = this.$store.subscribe((mutation, state) => {
-            if (mutation.type === 'changeMap') {
-                console.log(`Updating to ${state.currentMap}`);
-                const stage = this.$refs.stageObject.getNode();
-                console.log(stage);
-                // Do whatever makes sense now
-                console.log("Redrawing stage...");
-                stage.draw();
-                //this.stage.visible = true;
-            }
-        });
-    },
-    beforeDestroy() {
-        this.unsubscribe();
     },
 };
 </script>

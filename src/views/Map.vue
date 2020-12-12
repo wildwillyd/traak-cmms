@@ -1,5 +1,5 @@
 <template>
-    <a-layout>
+    <a-layout style="position:fixed;">
         <a-layout-header :style="{backgroundColor: 'lightgray'}">
             <a-row>
                 <a-col :span="4">
@@ -15,7 +15,7 @@
         </a-layout-header>
         <MapDrawer :visible="mapDrawerVisible" :type="drawerType" @closeDrawer="mapDrawerVisible = false" />
         <a-layout-content>
-            <LiveMap />
+            <LiveMap/>
         </a-layout-content>
     </a-layout>
 </template>
